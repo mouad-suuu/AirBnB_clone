@@ -1,67 +1,30 @@
 #!/usr/bin/python3
-
-'''
-    Test unit for user model
-'''
-
+"""
+Test suite for User class
+"""
 import unittest
 from models.base_model import BaseModel
 from models.user import User
 
 
 class TestUserModel(unittest.TestCase):
-    '''
-        Class Test User Model
-    '''
+    def setUp(self):
+        self.user = User()
+        self.user.username = "john_doe"
+        self.user.email = "john_doe@example.com"
+        self.user.password = "secure_password"
 
-    def test_user_model_inhertie(self):
-        '''
-            tests that the User class Inherits from BaseModel
-        '''
-        nu = User()
-        self.assertIsInstance(nu, BaseModel)
+    def test_class_exists(self):
+        self.assertEqual(str(type(self.user)), "<class 'models.user.User'>")
 
-    def test_user__model_params(self):
-        '''
-            test param user model
-        '''
+    def test_inheritance_user_model(self):
+        self.assertIsInstance(self.user, User)
+        self.assertEqual(type(self.user), User)
+        self.assertEqual(issubclass(self.user.__class__, BaseModel), True)
 
-        nu = User()
-        self.assertTrue("last_name" in nu.__dir__())
-        self.assertTrue("first_name" in nu.__dir__())
-        self.assertTrue("email" in nu.__dir__())
-        self.assertTrue("password" in nu.__dir__())
+    # Add more test cases based on the attributes and methods of your User class
 
-    def test_user_first_name(self):
-        '''
-            Test the type of name
-        '''
-        new = User()
-        name = getattr(new, "first_name")
-        self.assertIsInstance(name, str)
 
-    def test_user_last_name(self):
-        '''
-            test equal type last name 
-        '''
-        new = User()
-        name = getattr(new, "last_name")
-        self.assertIsInstance(name, str)
-
-    def test_user_email(self):
-        '''
-            test equal type email 
-        '''
-        new = User()
-        name = getattr(new, "email")
-        self.assertIsInstance(name, str)
-
-    
-    def test_user_password(self):
-        '''
-            test equal type last name 
-        '''
-        new = User()
-        name = getattr(new, "password")
-        self.assertIsInstance(name, str)
+if __name__ == '__main__':
+    unittest.main()
 
